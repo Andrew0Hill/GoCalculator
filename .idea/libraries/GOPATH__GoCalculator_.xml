@@ -1,0 +1,100 @@
+<component name="libraryTable">
+  <library name="GOPATH &lt;GoCalculator&gt;">
+    <CLASSES>
+      <root url="file://E:/Go/src/hash" />
+      <root url="file://E:/Go/src/go" />
+      <root url="file://E:/Go/src/errors" />
+      <root url="file://E:/Go/src/builtin" />
+      <root url="file://E:/Go/src/os" />
+      <root url="file://E:/Go/src/math" />
+      <root url="file://E:/Go/src/cmd" />
+      <root url="file://E:/Go/src/debug" />
+      <root url="file://E:/Go/src/vendor" />
+      <root url="file://E:/Go/src/strings" />
+      <root url="file://E:/Go/src/database" />
+      <root url="file://E:/Go/src/unsafe" />
+      <root url="file://E:/Go/src/log" />
+      <root url="file://E:/Go/src/flag" />
+      <root url="file://E:/Go/src/expvar" />
+      <root url="file://E:/Go/src/internal" />
+      <root url="file://E:/Go/src/bufio" />
+      <root url="file://E:/Go/src/syscall" />
+      <root url="file://E:/Go/src/regexp" />
+      <root url="file://E:/Go/src/unicode" />
+      <root url="file://E:/Go/src/archive" />
+      <root url="file://E:/Go/src/index" />
+      <root url="file://E:/Go/src/strconv" />
+      <root url="file://E:/Go/src/testing" />
+      <root url="file://E:/Go/src/io" />
+      <root url="file://E:/Go/src/compress" />
+      <root url="file://E:/Go/src/image" />
+      <root url="file://E:/Go/src/crypto" />
+      <root url="file://E:/Go/src/net" />
+      <root url="file://E:/Go/src/sync" />
+      <root url="file://E:/Go/src/text" />
+      <root url="file://E:/Go/src/encoding" />
+      <root url="file://E:/Go/src/html" />
+      <root url="file://E:/Go/src/sort" />
+      <root url="file://E:/Go/src/stack" />
+      <root url="file://E:/Go/src/context" />
+      <root url="file://E:/Go/src/reflect" />
+      <root url="file://E:/Go/src/path" />
+      <root url="file://E:/Go/src/fmt" />
+      <root url="file://E:/Go/src/mime" />
+      <root url="file://E:/Go/src/container" />
+      <root url="file://E:/Go/src/time" />
+      <root url="file://E:/Go/src/bytes" />
+      <root url="file://E:/Go/src/runtime" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://E:/Go/src/hash" />
+      <root url="file://E:/Go/src/go" />
+      <root url="file://E:/Go/src/errors" />
+      <root url="file://E:/Go/src/builtin" />
+      <root url="file://E:/Go/src/os" />
+      <root url="file://E:/Go/src/math" />
+      <root url="file://E:/Go/src/cmd" />
+      <root url="file://E:/Go/src/debug" />
+      <root url="file://E:/Go/src/vendor" />
+      <root url="file://E:/Go/src/strings" />
+      <root url="file://E:/Go/src/database" />
+      <root url="file://E:/Go/src/unsafe" />
+      <root url="file://E:/Go/src/log" />
+      <root url="file://E:/Go/src/flag" />
+      <root url="file://E:/Go/src/expvar" />
+      <root url="file://E:/Go/src/internal" />
+      <root url="file://E:/Go/src/bufio" />
+      <root url="file://E:/Go/src/syscall" />
+      <root url="file://E:/Go/src/regexp" />
+      <root url="file://E:/Go/src/unicode" />
+      <root url="file://E:/Go/src/archive" />
+      <root url="file://E:/Go/src/index" />
+      <root url="file://E:/Go/src/strconv" />
+      <root url="file://E:/Go/src/testing" />
+      <root url="file://E:/Go/src/io" />
+      <root url="file://E:/Go/src/compress" />
+      <root url="file://E:/Go/src/image" />
+      <root url="file://E:/Go/src/crypto" />
+      <root url="file://E:/Go/src/net" />
+      <root url="file://E:/Go/src/sync" />
+      <root url="file://E:/Go/src/text" />
+      <root url="file://E:/Go/src/encoding" />
+      <root url="file://E:/Go/src/html" />
+      <root url="file://E:/Go/src/sort" />
+      <root url="file://E:/Go/src/stack" />
+      <root url="file://E:/Go/src/context" />
+      <root url="file://E:/Go/src/reflect" />
+      <root url="file://E:/Go/src/path" />
+      <root url="file://E:/Go/src/fmt" />
+      <root url="file://E:/Go/src/mime" />
+      <root url="file://E:/Go/src/container" />
+      <root url="file://E:/Go/src/time" />
+      <root url="file://E:/Go/src/bytes" />
+      <root url="file://E:/Go/src/runtime" />
+    </SOURCES>
+    <excluded>
+      <root url="file://$PROJECT_DIR$" />
+    </excluded>
+  </library>
+</component>
