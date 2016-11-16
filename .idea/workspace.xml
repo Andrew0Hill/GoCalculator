@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="df97baf1-dcca-4ea5-b953-54e8385c87d3" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/calculator.go" afterPath="$PROJECT_DIR$/calculator.go" />
     </list>
     <ignored path="GoCalculator.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -113,6 +112,11 @@
     </leaf>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Andrew0Hill &lt;96ahill@gmail.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GradleLocalSettings">
@@ -198,6 +202,7 @@
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.254023" />
+    <property name="GO_FMT" value="false" />
   </component>
   <component name="RunManager" selected="Go Application.Debug calculator.go">
     <configuration default="false" name="Build calculator.go and run" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true">
@@ -677,12 +682,20 @@
       <workItem from="1479090772568" duration="5553000" />
       <workItem from="1479258867178" duration="152000" />
       <workItem from="1479265155706" duration="8633000" />
-      <workItem from="1479280002440" duration="670000" />
+      <workItem from="1479280002440" duration="699000" />
     </task>
+    <task id="LOCAL-00001" summary="I'm so sorry">
+      <created>1479280696559</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1479280696559</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25824000" />
+    <option name="totallyTimeSpent" value="25853000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -725,6 +738,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="I'm so sorry" />
+    <option name="LAST_COMMIT_MESSAGE" value="I'm so sorry" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
