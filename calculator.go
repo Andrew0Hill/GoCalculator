@@ -1,12 +1,12 @@
 package main
 
 import (
-		"bufio"
-		"fmt"
-		"os"
-		"stack"
-
+	"bufio"
+	"fmt"
+	"os"
+	"stack"
 	"math"
+	"reflect"
 )
 
 var operatorStack = stack.NewStack()
@@ -23,21 +23,51 @@ func precedence(op byte) uint8 {
 
 func apply() {
 	op := operatorStack.Pop().(byte)
-	right := float64(-1)
-	left := float64(-1)
+	var right interface{}
+	var left interface{}
+	floatT := reflect.TypeOf(0.0)
 	if !operandStack.IsEmpty() {
-		right = operandStack.Pop().(float64)
+		right = operandStack.Pop()
 	}
 	if !operandStack.IsEmpty() {
-		left = operandStack.Pop().(float64)
+		left = operandStack.Pop()
 	}
-	switch op {
-		case '+': operandStack.Push(left + right)
-		case '-': operandStack.Push(left - right)
-		case '*': operandStack.Push(left * right)
-		case '/': operandStack.Push(left / right)
+	if(reflect.TypeOf(right) == reflect.TypeOf(left)){
+		fmt.Println("Both types are of type " + reflect.TypeOf(right).String())
+		if(reflect.TypeOf(right) == reflect.TypeOf(0.0)){
+			switch op {
+			case '+': operandStack.Push(left.(float64) + right.(float64))
+			case '-': operandStack.Push(left.(float64) - right.(float64))
+			case '*': operandStack.Push(left.(float64) * right.(float64))
+			case '/': operandStack.Push(left.(float64) / right.(float64))
+			default: panic("illegal operator")
+			}
+		}else if (reflect.TypeOf(right).String() == "int"){
+			switch op {
+			case '+': operandStack.Push(left.(int) + right.(int))
+			case '-': operandStack.Push(left.(int) - right.(int))
+			case '*': operandStack.Push(left.(int) * right.(int))
+			case '/': operandStack.Push(left.(int) / right.(int))
+			default: panic("illegal operator")
+			}
+		}
+	}else{
+		rt := reflect.ValueOf(right)
+		rt = reflect.Indirect(rt)
+		rrt := rt.Convert(floatT)
+		lt := reflect.ValueOf(left)
+		lt = reflect.Indirect(lt)
+		rlt := lt.Convert(floatT)
+		switch op {
+		case '+': operandStack.Push(rlt.Float() + rrt.Float())
+		case '-': operandStack.Push(rlt.Float() - rrt.Float())
+		case '*': operandStack.Push(rlt.Float() * rrt.Float())
+		case '/': operandStack.Push(rlt.Float() / rrt.Float())
 		default: panic("illegal operator")
+		}
 	}
+
+
 }
 
 func main() {
@@ -45,16 +75,19 @@ func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
 	line := scanner.Text()
-	openParen := false
+	openCloseParens := 0
 	spacePrevious := bool(false)
+	numberPrevious := bool(false)
 	//validInputs := [...]byte{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9','+', '-', '*', '/','(',')','.'}
 	//
 	for i := 0; i < len(line); {
 		switch line[i] {
 			case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
 
-				v := float64(0)
+				floatValue := float64(0)
+				intValue := int(0)
 				x := int(-1)
+				numberPrevious = true
 				floatPart := bool(false)
 				if(spacePrevious){
 					panic("Illegal space in number.")
@@ -63,12 +96,13 @@ func main() {
 				for {
 					if (line[i] == '.'){
 						floatPart = true
+						floatValue = float64(intValue)
 
 					}else if (floatPart){
-						v = v + (math.Pow10(x)*float64(line[i]-'0'))
+						floatValue = floatValue + (math.Pow10(x)*float64(line[i]-'0'))
 						x--
 					}else {
-						v = v * 10 + float64(line[i] - '0')
+						intValue = intValue * 10 + int(line[i] - '0')
 					}
 					i++
 					if i == len(line) || (!('0' <= line[i] && line[i] <= '9') && (line[i] != '.')) {
@@ -78,8 +112,25 @@ func main() {
 						break
 					}
 				}
-				operandStack.Push(v)
+				if(floatPart){
+					pushVal := floatValue
+					fmt.Println(reflect.TypeOf(pushVal))
+					operandStack.Push(pushVal)
+				}else {
+					pushVal := intValue
+					fmt.Println(reflect.TypeOf(pushVal))
+					operandStack.Push(pushVal)
+				}
+
+
 			case '+', '-', '*', '/':
+				if(!numberPrevious){
+					panic("Error: invalid operator.")
+				}
+				if(operandStack.IsEmpty()){
+					panic("Error: Operator must be applied to two operands.")
+				}
+				numberPrevious = false
 				spacePrevious = false
 				for !operatorStack.IsEmpty() && precedence(operatorStack.Top().(byte)) >= precedence(line[i]) {
 					apply()
@@ -87,20 +138,16 @@ func main() {
 				operatorStack.Push(line[i])
 				i++
 			case '(':
-				openParen = true
+				openCloseParens++
 				spacePrevious = false
 				operatorStack.Push(line[i])
 				i++
 			case ')':
-				if(!openParen){
-					println("Error: Close parenthesis appears with no Open parenthesis")
-					panic("illegal character")
-				}
-				openParen = false
-
+				openCloseParens--
 				for !operatorStack.IsEmpty() && operatorStack.Top().(byte) != '(' {
 					apply()
 				}
+				operatorStack.Pop()
 				i++
 			case ' ':
 				i++
@@ -116,6 +163,13 @@ func main() {
 			apply()
 		}
 	}
-	r := operandStack.Pop().(float64)
+	r := operandStack.Pop()
+	if(!operandStack.IsEmpty()){
+		panic("Error: Invalid expression")
+	}
+	if(openCloseParens != 0){
+		panic("Error: Mismatched Parens")
+	}
+	fmt.Println(reflect.TypeOf(r))
 	fmt.Println(r)
 }
