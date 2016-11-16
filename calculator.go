@@ -26,6 +26,7 @@ func apply() {
 	var right interface{}
 	var left interface{}
 	floatT := reflect.TypeOf(0.0)
+	intT := reflect.TypeOf(0)
 	if !operandStack.IsEmpty() {
 		right = operandStack.Pop()
 	}
@@ -34,7 +35,7 @@ func apply() {
 	}
 	if(reflect.TypeOf(right) == reflect.TypeOf(left)){
 		fmt.Println("Both types are of type " + reflect.TypeOf(right).String())
-		if(reflect.TypeOf(right) == reflect.TypeOf(0.0)){
+		if(reflect.TypeOf(right) == floatT){
 			switch op {
 			case '+': operandStack.Push(left.(float64) + right.(float64))
 			case '-': operandStack.Push(left.(float64) - right.(float64))
@@ -42,7 +43,7 @@ func apply() {
 			case '/': operandStack.Push(left.(float64) / right.(float64))
 			default: panic("illegal operator")
 			}
-		}else if (reflect.TypeOf(right).String() == "int"){
+		}else if (reflect.TypeOf(right) == intT) {
 			switch op {
 			case '+': operandStack.Push(left.(int) + right.(int))
 			case '-': operandStack.Push(left.(int) - right.(int))
@@ -50,19 +51,23 @@ func apply() {
 			case '/': operandStack.Push(left.(int) / right.(int))
 			default: panic("illegal operator")
 			}
+		}else{
+			panic("Error: Invalid operand type.")
 		}
 	}else{
+		fmt.Println("Left operand is of type: " + reflect.TypeOf(left).String() + ".")
+		fmt.Println("Right operand is of type: " + reflect.TypeOf(right).String() + ".")
 		rt := reflect.ValueOf(right)
 		rt = reflect.Indirect(rt)
-		rrt := rt.Convert(floatT)
+		rt = rt.Convert(floatT)
 		lt := reflect.ValueOf(left)
 		lt = reflect.Indirect(lt)
-		rlt := lt.Convert(floatT)
+		lt = lt.Convert(floatT)
 		switch op {
-		case '+': operandStack.Push(rlt.Float() + rrt.Float())
-		case '-': operandStack.Push(rlt.Float() - rrt.Float())
-		case '*': operandStack.Push(rlt.Float() * rrt.Float())
-		case '/': operandStack.Push(rlt.Float() / rrt.Float())
+		case '+': operandStack.Push(lt.Float() + rt.Float())
+		case '-': operandStack.Push(lt.Float() - rt.Float())
+		case '*': operandStack.Push(lt.Float() * rt.Float())
+		case '/': operandStack.Push(lt.Float() / rt.Float())
 		default: panic("illegal operator")
 		}
 	}
@@ -78,11 +83,9 @@ func main() {
 	openCloseParens := 0
 	spacePrevious := bool(false)
 	numberPrevious := bool(false)
-	//validInputs := [...]byte{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9','+', '-', '*', '/','(',')','.'}
-	//
 	for i := 0; i < len(line); {
 		switch line[i] {
-			case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
+			case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.':
 
 				floatValue := float64(0)
 				intValue := int(0)
@@ -114,11 +117,11 @@ func main() {
 				}
 				if(floatPart){
 					pushVal := floatValue
-					fmt.Println(reflect.TypeOf(pushVal))
+					fmt.Println("Type of " + reflect.TypeOf(pushVal).String() + " is being pushed to the stack.")
 					operandStack.Push(pushVal)
 				}else {
 					pushVal := intValue
-					fmt.Println(reflect.TypeOf(pushVal))
+					fmt.Println("Type of " + reflect.TypeOf(pushVal).String() + " is being pushed to the stack.")
 					operandStack.Push(pushVal)
 				}
 
@@ -170,6 +173,6 @@ func main() {
 	if(openCloseParens != 0){
 		panic("Error: Mismatched Parens")
 	}
-	fmt.Println(reflect.TypeOf(r))
+	fmt.Println("Final result value is of type: " + reflect.TypeOf(r).String() + ".")
 	fmt.Println(r)
 }
